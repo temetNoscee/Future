@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class FurnitureUtil {
     private static final String[] FURNITURE_NAMES = {"sandalye", "kanape", "lamba"/* Add more product names here */};
@@ -14,15 +15,17 @@ public class FurnitureUtil {
         List<Furniture> furnitures = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < count; i++) {
-
             String name = FURNITURE_NAMES[random.nextInt(FURNITURE_NAMES.length)];
             BigDecimal price = FURNITURE_PRICES[random.nextInt(FURNITURE_PRICES.length)];
             Furniture.FurnitureCategory category = FURNITURE_CATEGORIES[random.nextInt(FURNITURE_CATEGORIES.length)];
             String imageId = String.valueOf(random.nextInt(5) + 1);
-            Furniture furniture = new Furniture(name, price, category, imageId);
+            Furniture furniture = new Furniture(name, price, category, imageId, false);
             furnitures.add(furniture);
         }
-        System.out.println(furnitures);
+
+        for (int i = 0; i < 5; i++) {
+            furnitures.get(i).setEditorsPick(true);
+        }
         return furnitures;
     }
 }

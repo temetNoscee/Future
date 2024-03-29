@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/home.css";
 import { Link } from "react-router-dom";
 import Title from "../components/Title/Title";
@@ -11,6 +11,7 @@ import "react-multi-carousel/lib/styles.css";
 import ProductCard from "../components/Product/ProductCard";
 
 import demo from "../assets/slider.png";
+import { Furniture } from "./Shop";
 
 const responsive = {
   superLargeDesktop: {
@@ -32,6 +33,17 @@ const responsive = {
   },
 };
 const Home: React.FC = () => {
+  const [editorsPickProducts, setEditorsPickProducts] = useState<Furniture[]>(
+    []
+  );
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch("http://localhost:8080/api/editors-pick");
+      const data = await res.json();
+      setEditorsPickProducts(data);
+    }
+    getData();
+  }, []);
   return (
     <Title title={"Home"}>
       <section className="banner-section">
@@ -64,46 +76,17 @@ const Home: React.FC = () => {
       <div className="carousel">
         <h1>Editor's Pick</h1>
         <Carousel responsive={responsive}>
-          <div>
-            <ProductCard
-              imageId={demo}
-              productName="Chair"
-              productPrice="5.99$"
-              productType="chair"
-            ></ProductCard>
-          </div>
-          <div>
-            <ProductCard
-              imageId={demo}
-              productName="Chair"
-              productPrice="5.99$"
-              productType="chair"
-            ></ProductCard>
-          </div>
-          <div>
-            <ProductCard
-              imageId={demo}
-              productName="Chair"
-              productPrice="5.99$"
-              productType="chair"
-            ></ProductCard>
-          </div>
-          <div>
-            <ProductCard
-              imageId={demo}
-              productName="Chair"
-              productPrice="5.99$"
-              productType="chair"
-            ></ProductCard>
-          </div>
-          <div>
-            <ProductCard
-              imageId={demo}
-              productName="Chair"
-              productPrice="5.99$"
-              productType="chair"
-            ></ProductCard>
-          </div>
+          {editorsPickProducts.map((product) => {
+            return (
+              <ProductCard
+                imageId={product.imageId}
+                productName={product.name}
+                productPrice={product.price}
+                productType={product.category}
+                key={product.id}
+              />
+            );
+          })}
         </Carousel>
         ;
       </div>

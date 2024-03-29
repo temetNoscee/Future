@@ -58,4 +58,10 @@ public class FurnitureController {
     public List<FurnitureCategory> getCategories() {
         return Arrays.asList(FurnitureCategory.values());
     }
+
+    @GetMapping
+    @RequestMapping(path = "/editors-pick")
+    public List<Furniture> getEditorsPick() {
+        return furnitureService.getEditorsPick();
+    }
 }

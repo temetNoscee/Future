@@ -15,7 +15,7 @@ import image from "../assets/furn/chair-1.jpg";
 import ProductCard from "../components/Product/ProductCard";
 import { useSearchParams } from "react-router-dom";
 
-interface Furniture {
+export interface Furniture {
   id: number;
   name: string;
   price: string;

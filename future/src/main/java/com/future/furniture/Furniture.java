@@ -22,6 +22,7 @@ public class Furniture {
     private BigDecimal price;
     private FurnitureCategory category;
     private String imageId;
+    private Boolean isEditorsPick;
 
     public enum FurnitureCategory {
         CHAIR,
@@ -29,22 +30,32 @@ public class Furniture {
         SOFA,
     }
 
-    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId) {
+    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.imageId = imageId;
+        this.isEditorsPick = isEditorsPick;
     }
 
     public Furniture() {
     }
 
-    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId) {
+    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.imageId = imageId;
+        this.isEditorsPick = isEditorsPick;
+    }
+
+    public Boolean getEditorsPick() {
+        return isEditorsPick;
+    }
+
+    public void setEditorsPick(Boolean editorsPick) {
+        isEditorsPick = editorsPick;
     }
 
     public String getImageId() {
@@ -95,6 +106,7 @@ public class Furniture {
                 ", price=" + price +
                 ", category=" + category +
                 ", imageId=" + imageId +
+                ", isEditorsPick=" + isEditorsPick +
                 '}';
     }
 }

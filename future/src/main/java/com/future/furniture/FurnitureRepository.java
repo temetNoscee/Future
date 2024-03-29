@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FurnitureRepository extends JpaRepository<Furniture, Long> {
 
@@ -16,4 +18,7 @@ public interface FurnitureRepository extends JpaRepository<Furniture, Long> {
 
     @Query("SELECT f FROM Furniture f WHERE f.name LIKE %:name% AND f.category = %:category%")
     Page<Furniture> searchFurnitureByNameAndCategory(String name, Furniture.FurnitureCategory category, Pageable pageable);
+
+    @Query("SELECT f FROM Furniture f WHERE f.isEditorsPick = true")
+    List<Furniture> getEditorsPick();
 }
