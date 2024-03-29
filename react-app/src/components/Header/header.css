@@ -1,0 +1,85 @@
+
+.header{
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+
+    position: sticky;
+    top: 0; /* Header'ın üst kenara sabitlenmesini sağlar */
+    z-index: 1000; /* Header'ın diğer elemanların üstünde olmasını sağlar */
+    background-color: #ffffff;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    vertical-align: text-top;
+}
+
+.logo img{
+    width:2rem;
+    height: 2rem;
+}
+
+.logo h1{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0a1d37;
+    margin: 0;
+}
+
+.menu{
+    display: flex;
+    align-items: center;
+    column-gap: 2.7rem;
+    margin-bottom: 0;
+}
+
+.nav-item a{
+    color: #0a1d37;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-icons{
+    display: flex;
+    align-items: center;
+    column-gap: 1.2rem;
+}
+
+.menu-icons span img{
+    width: 23px;
+    height: 23px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.cart-icon{
+    position: relative;
+}
+
+.num{
+    position: absolute;
+    top: 29%;
+    right: -30%;
+    width: 13px;
+    height: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    background: #0a1d37;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    z-index: 10;    
+}

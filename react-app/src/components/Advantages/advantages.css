@@ -1,0 +1,36 @@
+.adv-item{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    border-radius: 7px;
+    margin-top: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.adv-item:hover{
+    transform: scale(1.05);
+}
+
+.adv-item span img{
+    font-size: 3rem;
+    background: #0a1d37;
+    width: 2.2rem;
+    padding: -50px;   
+    border-radius:20px;
+    font-weight: 500 !important;
+}
+
+
+.adv-item h3{
+    color: #0a1d37;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+.adv-item p{
+    font-size: 0.9rem;
+    margin-top: 5px;
+    color: #222;
+}

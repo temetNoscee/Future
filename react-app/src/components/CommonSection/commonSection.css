@@ -1,0 +1,15 @@
+.common{
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(rgba(0,0,0,0.562),rgba(0,0,0,0.562)),url("https://img.freepik.com/free-photo/interior-modern-bright-room-with-white-sofa_587448-8145.jpg?t=st=1711274385~exp=1711277985~hmac=eafe388cc3bae8721bfef83bae052c590847c0c28c20882ab6315a94d65d3f19&w=1380") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.common h1{
+    color: #fff;
+    font-weight: 600;
+}
