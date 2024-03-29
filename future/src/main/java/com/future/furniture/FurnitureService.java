@@ -1,9 +1,10 @@
 package com.future.furniture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 
 public class FurnitureService {
@@ -14,19 +15,19 @@ public class FurnitureService {
         this.furnitureRepository = furnitureRepository;
     }
 
-    public List<Furniture> getAllFurnitures() {
-        return furnitureRepository.findAll();
+    public Page<Furniture> getAllFurnitures(Pageable pageable) {
+        return furnitureRepository.findAll(pageable);
     }
 
-    public List<Furniture> searchFurnitureByName(String name) {
-        return furnitureRepository.searchFurnitureByName(name);
+    public Page<Furniture> searchFurnitureByName(String name, Pageable pageable) {
+        return furnitureRepository.searchFurnitureByName(name, pageable);
     }
 
-    public List<Furniture> getFurnitureByCategory(Furniture.FurnitureCategory category) {
-        return furnitureRepository.getFurnitureByCategory(category);
+    public Page<Furniture> getFurnitureByCategory(Furniture.FurnitureCategory category, Pageable pageable) {
+        return furnitureRepository.getFurnitureByCategory(category, pageable);
     }
 
-    public List<Furniture> searchFurnitureByNameAndCategory(String name, Furniture.FurnitureCategory category) {
-        return furnitureRepository.searchFurnitureByName(name).stream().filter(f -> f.getCategory() == category).toList();
+    public Page<Furniture> searchFurnitureByNameAndCategory(String name, Furniture.FurnitureCategory category, Pageable pageable) {
+        return furnitureRepository.searchFurnitureByNameAndCategory(name, category, pageable);
     }
 }

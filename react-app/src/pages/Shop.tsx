@@ -2,10 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import Title from "../components/Title/Title";
 import CommonSection from "../components/CommonSection/CommonSection";
-import { Container, Row, Col } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
 import "../styles/shop.css";
 import image from "../assets/furn/chair-1.jpg";
 import ProductCard from "../components/Product/ProductCard";
+import { useSearchParams } from "react-router-dom";
 
 interface Furniture {
   id: number;
@@ -14,15 +22,31 @@ interface Furniture {
   category: string;
 }
 
+type Paged<T> = {
+  content: T;
+  totalPages: number;
+  pageable: {
+    pageNumber: number;
+  };
+};
+
 const Shop: React.FC = () => {
-  const [furnitures, setFurnitures] = useState<Furniture[]>([]);
+  const [furnitures, setFurnitures] = useState<Paged<Furniture[]>>({
+    content: [],
+    totalPages: 0,
+    pageable: {
+      pageNumber: 0,
+    },
+  });
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>();
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [params] = useSearchParams();
+  const page = params.get("page") ?? 0;
   useEffect(() => {
     const getDatas = async () => {
-      const response = await fetch(
-        `http://localhost:8080/api?name=${searchQuery}&category=${selectedCategory}`
-      );
+      const url = `http://localhost:8080/api?name=${searchQuery}&category=${selectedCategory}&page=${page}`;
+      console.log(url);
+      const response = await fetch(url);
       const body = await response.json();
       setFurnitures(body);
     };
@@ -101,7 +125,7 @@ const Shop: React.FC = () => {
           </Row>
         </Container>
 
-        {furnitures.map((furniture) => {
+        {furnitures.content.map((furniture) => {
           return (
             <div key={furniture.id}>
               <ProductCard
@@ -114,6 +138,27 @@ const Shop: React.FC = () => {
           );
         })}
       </section>
+      <Pagination>
+        <PaginationItem>
+          <PaginationLink href="?page=0" first></PaginationLink>
+        </PaginationItem>
+        {Array.from({ length: furnitures.totalPages }, (_, i) => {
+          return (
+            <PaginationItem
+              key={i}
+              active={furnitures.pageable.pageNumber === i}
+            >
+              <PaginationLink href={`?page=${i}`}>{i + 1}</PaginationLink>
+            </PaginationItem>
+          );
+        })}
+        <PaginationItem>
+          <PaginationLink
+            href={`?page=${furnitures.totalPages - 1}`}
+            last
+          ></PaginationLink>
+        </PaginationItem>
+      </Pagination>
     </Title>
   );
 };
