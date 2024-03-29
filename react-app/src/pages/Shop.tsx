@@ -16,14 +16,17 @@ interface Furniture {
 
 const Shop: React.FC = () => {
   const [furnitures, setFurnitures] = useState<Furniture[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     const getDatas = async () => {
-      const response = await fetch("http://localhost:8080/api");
+      const response = await fetch(
+        `http://localhost:8080/api?name=${searchQuery}`
+      );
       const body = await response.json();
       setFurnitures(body);
     };
     getDatas();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <Title title={"Shop"}>
@@ -44,7 +47,15 @@ const Shop: React.FC = () => {
             </Col>
             <Col lg="6" md="6">
               <div className="search">
-                <input type="text" placeholder="Search... " id="search-input" />
+                <input
+                  type="text"
+                  placeholder="Search... "
+                  id="search-input"
+                  onChange={(e) => {
+                    console.log(e.currentTarget.value);
+                    setSearchQuery(e.currentTarget.value ?? "");
+                  }}
+                />
                 <span>
                   <img
                     width="50"

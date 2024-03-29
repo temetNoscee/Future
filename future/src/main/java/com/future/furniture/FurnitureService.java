@@ -18,4 +18,8 @@ public class FurnitureService {
     public List<Furniture> getAllFurnitures() {
         return furnitureRepository.findAll();
     }
+
+    public List<Furniture> searchFurnitureByName(String name) {
+        return furnitureRepository.searchFurnitureByName(name);
+    }
 }
