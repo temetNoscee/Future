@@ -130,7 +130,7 @@ const Shop: React.FC = () => {
           return (
             <div key={furniture.id}>
               <ProductCard
-                productImg={furniture.imageId}
+                imageId={furniture.imageId}
                 productName={furniture.name}
                 productPrice={furniture.price}
                 productType={furniture.category}

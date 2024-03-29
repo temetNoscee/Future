@@ -2,14 +2,14 @@ import React from "react";
 import "../Product/productCard.css";
 
 interface ProductCardProps {
-  productImg: string;
+  imageId: string;
   productName: string;
   productPrice: string;
   productType: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
-  productImg,
+  imageId,
   productName,
   productPrice,
   productType,
@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div className="item">
       <div className="product-img">
         <img
-          src={`http://localhost:8080/images/${productImg}.jpg`}
+          src={`http://localhost:8080/images/${imageId}.jpg`}
           alt="product"
         />
       </div>
