@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FurnitureRepository extends JpaRepository<Furniture,Long> {
+public interface FurnitureRepository extends JpaRepository<Furniture, Long> {
 
     @Query("SELECT f FROM Furniture f WHERE f.name LIKE %:name%")
     Page<Furniture> searchFurnitureByName(String name, Pageable pageable);

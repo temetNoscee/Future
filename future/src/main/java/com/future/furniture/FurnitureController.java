@@ -18,6 +18,7 @@ import java.util.Optional;
 
 public class FurnitureController {
     private final FurnitureService furnitureService;
+
     @Autowired
     public FurnitureController(FurnitureService furnitureService) {
         this.furnitureService = furnitureService;
@@ -27,7 +28,7 @@ public class FurnitureController {
     public Page<Furniture> getAllFurnitures(
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "9") Integer size
-    ){
+    ) {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
         return furnitureService.getAllFurnitures(pageable);
     }

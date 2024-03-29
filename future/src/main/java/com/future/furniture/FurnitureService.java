@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class FurnitureService {
 
     private final FurnitureRepository furnitureRepository;
+
     @Autowired
     public FurnitureService(FurnitureRepository furnitureRepository) {
         this.furnitureRepository = furnitureRepository;
