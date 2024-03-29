@@ -20,6 +20,7 @@ interface Furniture {
   name: string;
   price: string;
   category: string;
+  imageId: string;
 }
 
 type Paged<T> = {
@@ -129,7 +130,7 @@ const Shop: React.FC = () => {
           return (
             <div key={furniture.id}>
               <ProductCard
-                productImg={image}
+                productImg={furniture.imageId}
                 productName={furniture.name}
                 productPrice={furniture.price}
                 productType={furniture.category}

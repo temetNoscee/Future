@@ -3,13 +3,14 @@ package com.future.furniture;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+
 @Entity
 @Table
 public class Furniture {
     @Id
     @SequenceGenerator(
-            name="furniture_sequence",
-            sequenceName="furniture_sequence",
+            name = "furniture_sequence",
+            sequenceName = "furniture_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
@@ -20,27 +21,38 @@ public class Furniture {
     private String name;
     private BigDecimal price;
     private FurnitureCategory category;
+    private String imageId;
 
-    public enum FurnitureCategory{
+    public enum FurnitureCategory {
         CHAIR,
         FLOOR_LAMP,
         SOFA,
     }
 
-    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category) {
+    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
+        this.imageId = imageId;
     }
 
     public Furniture() {
     }
 
-    public Furniture(String name, BigDecimal price, FurnitureCategory category) {
+    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId) {
         this.name = name;
         this.price = price;
         this.category = category;
+        this.imageId = imageId;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public Long getId() {
@@ -82,6 +94,7 @@ public class Furniture {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", category=" + category +
+                ", imageId=" + imageId +
                 '}';
     }
 }
