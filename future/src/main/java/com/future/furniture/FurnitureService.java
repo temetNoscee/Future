@@ -3,7 +3,6 @@ package com.future.furniture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 @Service
 
@@ -21,5 +20,13 @@ public class FurnitureService {
 
     public List<Furniture> searchFurnitureByName(String name) {
         return furnitureRepository.searchFurnitureByName(name);
+    }
+
+    public List<Furniture> getFurnitureByCategory(Furniture.FurnitureCategory category) {
+        return furnitureRepository.getFurnitureByCategory(category);
+    }
+
+    public List<Furniture> searchFurnitureByNameAndCategory(String name, Furniture.FurnitureCategory category) {
+        return furnitureRepository.searchFurnitureByName(name).stream().filter(f -> f.getCategory() == category).toList();
     }
 }

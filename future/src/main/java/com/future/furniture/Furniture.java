@@ -22,9 +22,9 @@ public class Furniture {
     private FurnitureCategory category;
 
     public enum FurnitureCategory{
-        Chair,
-        Floor_lamp,
-        Sofa
+        CHAIR,
+        FLOOR_LAMP,
+        SOFA,
     }
 
     public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category) {

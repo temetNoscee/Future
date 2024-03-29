@@ -11,4 +11,6 @@ public interface FurnitureRepository extends JpaRepository<Furniture,Long> {
 
     @Query("SELECT f FROM Furniture f WHERE f.name LIKE %:name%")
     List<Furniture> searchFurnitureByName(String name);
+
+    List<Furniture> getFurnitureByCategory(Furniture.FurnitureCategory category);
 }
