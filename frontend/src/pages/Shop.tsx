@@ -11,7 +11,7 @@ import {
   PaginationLink,
 } from "reactstrap";
 import "../styles/shop.css";
-import image from "../assets/furn/chair-1.jpg";
+//import image from "../assets/furn/chair-1.jpg";
 import ProductCard from "../components/Product/ProductCard";
 import { useSearchParams } from "react-router-dom";
 
@@ -114,7 +114,7 @@ const Shop: React.FC = () => {
                 </span>
               </div>
             </Col>
-            <Col lg="3" md="3">
+            {/* <Col lg="3" md="3">
               <div className="filter sort">
                 <select id="sorting-filter">
                   <option>Sort By</option>
@@ -122,7 +122,7 @@ const Shop: React.FC = () => {
                   <option value="descending">Descending</option>
                 </select>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
 

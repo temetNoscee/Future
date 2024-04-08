@@ -10,7 +10,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ProductCard from "../components/Product/ProductCard";
 
-import demo from "../assets/slider.png";
+//import demo from "../assets/slider.png";
 import { Furniture } from "./Shop";
 
 const responsive = {
