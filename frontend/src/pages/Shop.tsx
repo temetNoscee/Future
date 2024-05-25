@@ -11,7 +11,7 @@ import {
   PaginationLink,
 } from "reactstrap";
 import "../styles/shop.css";
-//import image from "../assets/furn/chair-1.jpg";
+
 import ProductCard from "../components/Product/ProductCard";
 import { useSearchParams } from "react-router-dom";
 
@@ -114,30 +114,24 @@ const Shop: React.FC = () => {
                 </span>
               </div>
             </Col>
-            {/* <Col lg="3" md="3">
-              <div className="filter sort">
-                <select id="sorting-filter">
-                  <option>Sort By</option>
-                  <option value="ascending">Ascending</option>
-                  <option value="descending">Descending</option>
-                </select>
-              </div>
-            </Col> */}
           </Row>
         </Container>
 
-        {furnitures.content.map((furniture) => {
-          return (
-            <div key={furniture.id}>
-              <ProductCard
-                imageId={furniture.imageId}
-                productName={furniture.name}
-                productPrice={furniture.price}
-                productType={furniture.category}
-              />
-            </div>
-          );
-        })}
+        <div className="shop-items">
+          {furnitures.content.map((furniture) => {
+            return (
+              <div key={furniture.id} className="product-wrapper">
+                <ProductCard
+                  imageId={furniture.imageId}
+                  productName={furniture.name}
+                  productPrice={furniture.price}
+                  productType={furniture.category}
+                  productId={furniture.id}
+                />
+              </div>
+            );
+          })}
+        </div>
       </section>
       <Pagination>
         <PaginationItem>

@@ -1,60 +1,60 @@
-.banner-section{
-    background: #A7C8CD;
-    align-items: center;
+.banner-section {
+  background: #a7c8cd;
+  align-items: center;
 }
 
-.banner-content{
-    padding-top:45px;
+.banner-content {
+  padding-top: 45px;
 }
 
-.banner-content h2{
-    color: #0a1d37;
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin: 20px 0px;
+.banner-content h2 {
+  color: #0a1d37;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 20px 0px;
 }
 
-.banner-content p{
-    color: #0a1d37;
-    line-height: 28px;
+.banner-content p {
+  color: #0a1d37;
+  line-height: 28px;
 }
 
-.shop-btn{
-    border: none;
-    outline: none;
-    padding: 8px 20px;
-    border-radius: 5px;
-    background-color: #0a1d37;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 25px;
-    transition: transform 0.2s ease-in-out;
+.shop-btn {
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  background-color: #0a1d37;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 25px;
+  transition: transform 0.2s ease-in-out;
+  color: #fff;
 }
 
-.shop-btn a{
-    color: #fff; 
-    text-decoration: none;
+.shop-btn a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.shop-btn:hover{
-    transform: scale(1.1);
+.shop-btn:hover {
+  transform: scale(1.1);
 }
 
-.banner-img{
-    display: flex;
-    justify-content:center; 
+.banner-img {
+  display: flex;
+  justify-content: center;
 }
 
-.banner-img img{
-    width: 70%;
-    height: auto;
+.banner-img img {
+  width: 70%;
+  height: auto;
 }
 
-.carousel h1{
-    text-align: center;
-    margin-top: 60px;
-    margin-bottom: 20px;
-    color: #0a1d37;
-    font-weight: 400;
+.carousel h1 {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #0a1d37;
+  font-weight: 400;
 }
-

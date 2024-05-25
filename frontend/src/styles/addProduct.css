@@ -1,0 +1,38 @@
+.row {
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+}
+
+.info .form-group {
+  margin-right: 15px;
+  width: 100%;
+}
+
+.form {
+  background: pink;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group span {
+  color: rgb(237, 115, 34);
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.374);
+}
+
+.form-group select {
+  background: #0a1d3fcc;
+  color: #fff;
+}

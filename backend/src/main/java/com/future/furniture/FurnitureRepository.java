@@ -4,9 +4,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FurnitureRepository extends JpaRepository<Furniture, Long> {
@@ -21,4 +23,8 @@ public interface FurnitureRepository extends JpaRepository<Furniture, Long> {
 
     @Query("SELECT f FROM Furniture f WHERE f.isEditorsPick = true")
     List<Furniture> getEditorsPick();
+
+    /*DENEMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
+    @Query("SELECT f FROM Furniture f WHERE f.id = :id")
+    Furniture getSelectedProduct(@Param("id") Long id);
 }

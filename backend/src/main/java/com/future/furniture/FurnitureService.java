@@ -1,5 +1,6 @@
 package com.future.furniture;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +37,10 @@ public class FurnitureService {
 
     public List<Furniture> getEditorsPick() {
         return furnitureRepository.getEditorsPick();
+    }
+
+
+    public Furniture getSelectedProduct(Long id) {
+        return furnitureRepository.getSelectedProduct(id);
     }
 }

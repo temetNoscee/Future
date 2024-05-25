@@ -1,53 +1,69 @@
-
-.filter select{
-    padding: 8px 10px;
-    border: 1px solid #0a1d37;
-    cursor: pointer;
-    border-radius: 5px;
-    background: #0a1d37;
-    color: #fff;
+.filter select {
+  padding: 8px 10px;
+  border: 1px solid #0a1d37;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #0a1d37;
+  color: #fff;
 }
 
-
-.filter select:focus{
-    outline: none !important;
+.filter select:focus {
+  outline: none !important;
 }
 
-.filter select option{
-    font-size: 0.9rem;
+.filter select option {
+  font-size: 0.9rem;
 }
 
-.category{
-    text-align: right;
+.category {
+  text-align: right;
 }
 
-.search{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    border: 1px solid #0a1d37;
-    border-radius: 5px;
-    cursor: pointer;
-
+.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  border: 1px solid #0a1d37;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.search input{
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 8px 10px;
+.search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px 10px;
 }
 
-
-.search img{
-    width: 25px;
-    height: auto;
-    margin-right: 7px;
-    cursor: pointer;
+.search img {
+  width: 25px;
+  height: auto;
+  margin-right: 7px;
+  cursor: pointer;
 }
 
 .search input[type="text"] {
-    color: #0a1d37;
+  color: #0a1d37;
 }
 
+.shop-items {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding: 12px;
+  justify-content: center;
+}
+
+.shop-items .product-wrapper {
+  flex: 0 0 calc(33.33% - 70px); /* Her sütunun genişliğini ayarla */
+  margin-bottom: 20px; /* Ürünler arası boşluk */
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.pagination a {
+  color: #0a1d37;
+}

@@ -84,6 +84,7 @@ const Home: React.FC = () => {
                 productPrice={product.price}
                 productType={product.category}
                 key={product.id}
+                productId={product.id}
               />
             );
           })}
