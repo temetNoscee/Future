@@ -19,7 +19,13 @@ public class FurnitureUtil {
             BigDecimal price = FURNITURE_PRICES[random.nextInt(FURNITURE_PRICES.length)];
             Furniture.FurnitureCategory category = FURNITURE_CATEGORIES[random.nextInt(FURNITURE_CATEGORIES.length)];
             String imageId = String.valueOf(random.nextInt(5) + 1);
-            Furniture furniture = new Furniture(name, price, category, imageId, false);
+            Furniture furniture = new Furniture();
+            furniture.setName(name);
+            furniture.setPrice(price);
+            furniture.setCategory(category);
+            furniture.setImageId(imageId);
+            furniture.setEditorsPick(false);
+            furniture.setStock(random.nextInt(100) + 1);
             furnitures.add(furniture);
         }
 
