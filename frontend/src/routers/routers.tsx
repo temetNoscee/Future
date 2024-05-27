@@ -4,6 +4,7 @@ import {
   redirect,
 } from "react-router-dom";
 
+import axios from "axios";
 import AddProduct from "../admin/addProdut";
 import AdminNav from "../admin/adminNav";
 import Quantity from "../admin/quantity";
@@ -15,14 +16,21 @@ import Login from "../pages/Login";
 import ProductDetails from "../pages/ProductDetails";
 import Shop from "../pages/Shop";
 import { api } from "../api";
-import axios from "axios";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layouts />,
     children: [
-      { path: "/", element: <Home />, index: true },
+      {
+        path: "/",
+        element: <Home />,
+        index: true,
+        loader: async () => {
+          const { data: products } = await api.get("/editors-pick");
+          return { products };
+        },
+      },
       { path: "shop", element: <Shop /> },
       { path: "cart", element: <Cart /> },
       { path: "shop/:id", element: <ProductDetails /> },

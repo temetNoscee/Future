@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "api/user")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
