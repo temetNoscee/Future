@@ -37,6 +37,7 @@ public class CommentController {
     public void addComment(
             @RequestParam Long furnitureId,
             @RequestParam String content,
+            @RequestParam Integer stars,
             @RequestParam String token
     ) {
         Furniture furniture = furnitureRepository.findById(furnitureId)
@@ -46,6 +47,7 @@ public class CommentController {
         comment.setFurniture(furniture);
         comment.setContent(content);
         comment.setUser(user);
+        comment.setStars(stars);
         commentRepository.save(comment);
     }
 }

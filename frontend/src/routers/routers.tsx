@@ -29,7 +29,7 @@ export const routes = createBrowserRouter([
         element: <Home />,
         index: true,
         loader: async () => {
-          const { data: products } = await api.get("/editors-pick");
+          const { data: products } = await api().get("/editors-pick");
           return { products };
         },
       },
@@ -37,7 +37,7 @@ export const routes = createBrowserRouter([
         path: "shop",
         element: <Shop />,
         loader: async () => {
-          const { data: categories } = await api.get("/categories");
+          const { data: categories } = await api().get("/categories");
           return { categories };
         },
       },
@@ -48,8 +48,8 @@ export const routes = createBrowserRouter([
         loader: async ({ params }: LoaderFunctionArgs) => {
           const id = params.id;
           invariant(id, "id is required");
-          const { data: product } = await api.get(`/shop/${id}`);
-          const { data: comments } = await api.get("/comment", {
+          const { data: product } = await api().get(`/shop/${id}`);
+          const { data: comments } = await api().get("/comment", {
             params: {
               furnitureId: id,
             },
@@ -63,10 +63,12 @@ export const routes = createBrowserRouter([
           invariant(id, "id is required");
           if (_action === "comment") {
             const content = form.get("content") as string;
-            await api.post("/comment", null, {
+            const stars = form.get("stars") as string;
+            await api().post("/comment", null, {
               params: {
                 furnitureId: id,
                 content,
+                stars,
               },
             });
             return null;

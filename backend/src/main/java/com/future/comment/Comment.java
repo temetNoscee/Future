@@ -27,20 +27,24 @@ public class Comment {
     @ManyToOne
     private User user;
 
+    private Integer stars;
+
     public Comment() {
     }
 
-    public Comment(Long id, String content, Furniture furniture, User user) {
+    public Comment(Long id, String content, Furniture furniture, User user, Integer stars) {
         this.id = id;
         this.content = content;
         this.furniture = furniture;
         this.user = user;
+        this.stars = stars;
     }
 
-    public Comment(String content, Furniture furniture, User user) {
+    public Comment(String content, Furniture furniture, User user, Integer stars) {
         this.content = content;
         this.furniture = furniture;
         this.user = user;
+        this.stars = stars;
     }
 
     public Long getId() {
@@ -73,5 +77,13 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getStars() {
+        return stars;
+    }
+
+    public void setStars(Integer stars) {
+        this.stars = stars;
     }
 }

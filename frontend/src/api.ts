@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-
-export const api = axios.create({
-  baseURL: "/api",
-  withCredentials: true,
-  params: {
-    token: token,
-  },
-});
+export function api() {
+  const token = localStorage.getItem("token");
+  return axios.create({
+    baseURL: "/api",
+    params: {
+      token,
+    },
+  });
+}

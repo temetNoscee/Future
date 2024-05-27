@@ -23,6 +23,7 @@ const ProductDetails: React.FC = () => {
     id: number;
     user: { username: string };
     content: string;
+    stars: number;
   }
 
   return (
@@ -131,13 +132,24 @@ const ProductDetails: React.FC = () => {
                 <div className="tab-content review">
                   <h6 className="titleforreview">Leave Your Experience</h6>
 
-                  <Form method="post">
+                  <Form method="post" className="d-flex flex-column gap-1">
                     <input type="hidden" name="_action" value="comment" />
                     <textarea
                       className="comment-area"
                       name="content"
                       placeholder="Leave a comment...."
                     ></textarea>
+                    <label htmlFor="stars">
+                      Stars
+                      <input
+                        id="stars"
+                        type="number"
+                        name="stars"
+                        min={0}
+                        max={5}
+                        className="px-2 py-1 rounded-md"
+                      />
+                    </label>
                     <button className="btn-submit">Submit</button>
                   </Form>
                   <h6 className="titleforreview">Reviews</h6>
@@ -154,6 +166,7 @@ const ProductDetails: React.FC = () => {
                         <div className="rvw-txt">
                           <h6>{comment.user.username}</h6>
                           <p>{comment.content}</p>
+                          <p>{comment.stars}</p>
                         </div>
                       </div>
                     ))}
