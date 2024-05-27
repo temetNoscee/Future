@@ -13,7 +13,7 @@ import {
 import "../styles/shop.css";
 
 import ProductCard from "../components/Product/ProductCard";
-import { useSearchParams } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 
 export interface Furniture {
   id: number;
@@ -53,15 +53,8 @@ const Shop: React.FC = () => {
     };
     getDatas();
   }, [searchQuery, selectedCategory]);
-  const [categories, setCategories] = useState<string[]>([]);
-  useEffect(() => {
-    const getCategories = async () => {
-      const res = await fetch("http://localhost:8080/api/categories");
-      const data = await res.json();
-      setCategories(data);
-    };
-    getCategories();
-  }, [setCategories]);
+
+  const { categories } = useLoaderData() as { categories: string[] };
 
   return (
     <Title title={"Shop"}>

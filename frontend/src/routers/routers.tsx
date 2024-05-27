@@ -33,7 +33,14 @@ export const routes = createBrowserRouter([
           return { products };
         },
       },
-      { path: "shop", element: <Shop /> },
+      {
+        path: "shop",
+        element: <Shop />,
+        loader: async () => {
+          const { data: categories } = await api.get("/categories");
+          return { categories };
+        },
+      },
       { path: "cart", element: <Cart /> },
       {
         path: "shop/:id",
