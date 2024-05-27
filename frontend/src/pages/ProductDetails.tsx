@@ -1,32 +1,18 @@
-import React from "react";
-import Title from "../components/Title/Title";
+import React, { useState } from "react";
+import { useLoaderData } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
 import CommonSection from "../components/CommonSection/CommonSection";
-import { Container, Row, Col } from "reactstrap";
+import Title from "../components/Title/Title";
 import "../styles/productDetails.css";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { Furniture } from "./Shop";
-import { Rating } from "react-simple-star-rating";
 
 const ProductDetails: React.FC = () => {
-  const { id } = useParams();
   const [tab, setTab] = useState("desc");
   const [gosterilecekYorumSayisi, setGosterilecekYorumSayisi] = useState(5);
   const yorumlariGoster = () => {
     setGosterilecekYorumSayisi((prevSayi) => prevSayi + 5);
   };
-  const [product, setProduct] = useState<Furniture>();
-
-  useEffect(() => {
-    const getProduct = async () => {
-      const url = `http://localhost:8080/api/shop/${id}`;
-      console.log(url);
-      const response = await fetch(url);
-      const body = await response.json();
-      setProduct(body);
-    };
-    getProduct();
-  }, [id]);
+  const { product } = useLoaderData() as { product: Furniture };
 
   const loremText =
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit Quo nam ipsum corporis vero fugit veritatis odit obcaecati omnis, velit temporibus, aliquam molestias doloremque! Hicplaceat voluptas enim laboriosam dolore ipsum?Lorem ipsumdolor sit amet consectetur, adipisicing elit. Numquam, ullamdicta asperiores voluptate nostrum architecto laboriosamqui, quisquam soluta doloribus quod illo quos repellatfugiat. Ratione dignissimos quasi perferendis quaerat.";

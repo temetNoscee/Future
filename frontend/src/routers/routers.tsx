@@ -1,6 +1,7 @@
 import {
   ActionFunctionArgs,
   createBrowserRouter,
+  LoaderFunctionArgs,
   redirect,
 } from "react-router-dom";
 
@@ -16,6 +17,7 @@ import Login from "../pages/Login";
 import ProductDetails from "../pages/ProductDetails";
 import Shop from "../pages/Shop";
 import { api } from "../api";
+import invariant from "tiny-invariant";
 
 export const routes = createBrowserRouter([
   {
@@ -33,7 +35,16 @@ export const routes = createBrowserRouter([
       },
       { path: "shop", element: <Shop /> },
       { path: "cart", element: <Cart /> },
-      { path: "shop/:id", element: <ProductDetails /> },
+      {
+        path: "shop/:id",
+        element: <ProductDetails />,
+        loader: async ({ params }: LoaderFunctionArgs) => {
+          const id = params.id;
+          invariant(id, "id is required");
+          const { data: product } = await api.get(`/shop/${id}`);
+          return { product };
+        },
+      },
       { path: "dashboard", element: <AdminNav /> },
       { path: "dashboard/add-product", element: <AddProduct /> },
       { path: "dashboard/answer", element: <Questions /> },
