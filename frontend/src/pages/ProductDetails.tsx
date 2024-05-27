@@ -178,11 +178,14 @@ const ProductDetails: React.FC = () => {
                 </div>
               ) : (
                 <div className="tab-content seller">
-                  <textarea
-                    name=""
-                    id=""
-                    placeholder="Ask a question about product..."
-                  ></textarea>
+                  <Form method="post">
+                    <input type="hidden" name="_action" value="ask" />
+                    <textarea
+                      name="content"
+                      placeholder="Ask a question about product..."
+                    ></textarea>
+                    <button className="btn-submit">Submit</button>
+                  </Form>
                 </div>
               )}
             </Col>

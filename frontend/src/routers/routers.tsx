@@ -61,6 +61,16 @@ export const routes = createBrowserRouter([
           const _action = form.get("_action") as "comment" | "ask";
           const id = params.id;
           invariant(id, "id is required");
+          if (_action === "ask") {
+            const content = form.get("content") as string;
+            await api().post("/question", null, {
+              params: {
+                furnitureId: id,
+                content,
+              },
+            });
+            return null;
+          }
           if (_action === "comment") {
             const content = form.get("content") as string;
             const stars = form.get("stars") as string;
@@ -76,10 +86,6 @@ export const routes = createBrowserRouter([
           return null;
         },
       },
-      { path: "dashboard", element: <AdminNav /> },
-      { path: "dashboard/add-product", element: <AddProduct /> },
-      { path: "dashboard/answer", element: <Questions /> },
-      { path: "dashboard/quantity", element: <Quantity /> },
       {
         path: "login",
         element: <Login />,
@@ -123,4 +129,26 @@ export const routes = createBrowserRouter([
       },
     ],
   },
+  { path: "dashboard", element: <AdminNav /> },
+  { path: "dashboard/add-product", element: <AddProduct /> },
+  {
+    path: "dashboard/answer",
+    element: <Questions />,
+    action: async ({ request }: ActionFunctionArgs) => {
+      const form = await request.formData();
+      const questionId = form.get("question-id") as string;
+      const response = form.get("response") as string;
+      await api().post(`/question/${questionId}/answer`, null, {
+        params: {
+          response,
+        },
+      });
+      return null;
+    },
+    loader: async () => {
+      const { data: questions } = await api().get("/question");
+      return { questions };
+    },
+  },
+  { path: "dashboard/quantity", element: <Quantity /> },
 ]);
