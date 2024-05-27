@@ -54,7 +54,16 @@ export const routes = createBrowserRouter([
               furnitureId: id,
             },
           });
-          return { product, comments };
+          const response = await api().get("/question/my-question", {
+            params: {
+              furnitureId: id,
+            },
+            validateStatus(status) {
+              return status === 200 || status === 404;
+            },
+          });
+          const question = response.status === 200 ? response.data : null;
+          return { product, comments, question };
         },
         action: async ({ request, params }: ActionFunctionArgs) => {
           const form = await request.formData();

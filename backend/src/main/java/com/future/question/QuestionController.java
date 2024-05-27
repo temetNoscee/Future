@@ -27,6 +27,15 @@ public class QuestionController {
         return questionRepository.findAll();
     }
 
+    @GetMapping("/my-question")
+    public Question myQuestion(@RequestParam String token, @RequestParam Long furnitureId) {
+        User user = authorizationFilter.requiresLogin(token);
+        Furniture furniture = furnitureRepository.findById(furnitureId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Furniture not found"));
+        return questionRepository.findByUserAndFurniture(user, furniture)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found"));
+    }
+
     @PostMapping("/{id}/answer")
     public void answerQuestion(@PathVariable Long id, @RequestParam String response) {
         //TODO: This should require admin privileges.
