@@ -23,6 +23,15 @@ public class Furniture {
     private FurnitureCategory category;
     private String imageId;
     private Boolean isEditorsPick;
+    private Integer stock;
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
     public enum FurnitureCategory {
         CHAIR,
@@ -30,24 +39,26 @@ public class Furniture {
         SOFA,
     }
 
-    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick) {
+    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick, Integer stock) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.imageId = imageId;
         this.isEditorsPick = isEditorsPick;
+        this.stock = stock;
     }
 
     public Furniture() {
     }
 
-    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick) {
+    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick, Integer stock) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.imageId = imageId;
         this.isEditorsPick = isEditorsPick;
+        this.stock = stock;
     }
 
     public Boolean getEditorsPick() {

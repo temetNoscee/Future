@@ -4,7 +4,9 @@ import com.future.furniture.Furniture.FurnitureCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,10 +17,17 @@ import java.util.Optional;
 
 public class FurnitureController {
     private final FurnitureService furnitureService;
+    private final FurnitureRepository furnitureRepository;
 
     @Autowired
-    public FurnitureController(FurnitureService furnitureService) {
+    public FurnitureController(FurnitureService furnitureService, FurnitureRepository furnitureRepository) {
         this.furnitureService = furnitureService;
+        this.furnitureRepository = furnitureRepository;
+    }
+
+    @GetMapping("/furniture/all")
+    public List<Furniture> getAllFurnitures() {
+        return furnitureRepository.findAll();
     }
 
     @GetMapping
@@ -67,5 +76,14 @@ public class FurnitureController {
     @RequestMapping(path = "/shop/{id}")
     public Furniture getSelectedProduct(@PathVariable Long id) {
         return furnitureService.getSelectedProduct(id);
+    }
+
+    @PostMapping("/furniture/{id}/change-stock")
+    public void changeStock(@PathVariable Long id, @RequestParam Integer stock) {
+        //TODO: This should require admin privileges.
+        Furniture furniture = furnitureRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Furniture not found"));
+        furniture.setStock(stock);
+        furnitureRepository.save(furniture);
     }
 }

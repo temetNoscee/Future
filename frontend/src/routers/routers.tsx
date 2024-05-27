@@ -159,5 +159,23 @@ export const routes = createBrowserRouter([
       return { questions };
     },
   },
-  { path: "dashboard/quantity", element: <Quantity /> },
+  {
+    path: "dashboard/quantity",
+    element: <Quantity />,
+    loader: async () => {
+      const { data: furnitures } = await api().get("/furniture/all");
+      return { furnitures };
+    },
+    action: async ({ request }: ActionFunctionArgs) => {
+      const form = await request.formData();
+      const stock = form.get("stock") as string;
+      const furnitureId = form.get("furniture-id") as string;
+      await api().post(`/furniture/${furnitureId}/change-stock`, null, {
+        params: {
+          stock,
+        },
+      });
+      return null;
+    },
+  },
 ]);
