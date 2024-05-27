@@ -6,15 +6,30 @@ import Title from "../components/Title/Title";
 import "../styles/productDetails.css";
 import { Furniture } from "./Shop";
 
+type Question = {
+  id: number;
+  content: string;
+  response: string;
+  user: {
+    id: number;
+    username: string;
+  };
+  furniture: {
+    id: number;
+    name: string;
+  };
+};
+
 const ProductDetails: React.FC = () => {
   const [tab, setTab] = useState("desc");
   const [displayedCommentNumber, setDisplayedCommentNumber] = useState(5);
   const showMoreComments = () => {
     setDisplayedCommentNumber((count) => count + 5);
   };
-  const { product, comments } = useLoaderData() as {
+  const { product, comments, question } = useLoaderData() as {
     product: Furniture;
     comments: Comment[];
+    question: Question | null;
   };
 
   const loremText =
@@ -178,11 +193,22 @@ const ProductDetails: React.FC = () => {
                 </div>
               ) : (
                 <div className="tab-content seller">
-                  <textarea
-                    name=""
-                    id=""
-                    placeholder="Ask a question about product..."
-                  ></textarea>
+                  <Form method="post">
+                    <input type="hidden" name="_action" value="ask" />
+                    <textarea
+                      name="content"
+                      placeholder="Ask a question about product..."
+                    ></textarea>
+                    <button className="btn-submit">Submit</button>
+                  </Form>
+                  {question && (
+                    <div className="question">
+                      <h6>Question</h6>
+                      <p>{question.content}</p>
+                      <h6>Answer</h6>
+                      <p>{question.response}</p>
+                    </div>
+                  )}
                 </div>
               )}
             </Col>
