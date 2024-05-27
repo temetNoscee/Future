@@ -42,7 +42,29 @@ export const routes = createBrowserRouter([
           const id = params.id;
           invariant(id, "id is required");
           const { data: product } = await api.get(`/shop/${id}`);
-          return { product };
+          const { data: comments } = await api.get("/comment", {
+            params: {
+              furnitureId: id,
+            },
+          });
+          return { product, comments };
+        },
+        action: async ({ request, params }: ActionFunctionArgs) => {
+          const form = await request.formData();
+          const _action = form.get("_action") as "comment" | "ask";
+          const id = params.id;
+          invariant(id, "id is required");
+          if (_action) {
+            const content = form.get("content") as string;
+            await api.post("/comment", null, {
+              params: {
+                furnitureId: id,
+                content,
+              },
+            });
+            return null;
+          }
+          return null;
         },
       },
       { path: "dashboard", element: <AdminNav /> },
@@ -59,7 +81,7 @@ export const routes = createBrowserRouter([
             const email = form.get("email") as string;
             const password = form.get("password") as string;
             const { data: token } = await axios.post(
-              "http://localhost:8080/api/v1/user/login",
+              "http://localhost:8080/api/user/login",
               null,
               {
                 params: {
@@ -75,7 +97,7 @@ export const routes = createBrowserRouter([
             const password = form.get("password") as string;
             const username = form.get("username") as string;
             const { data: token } = await axios.post(
-              "http://localhost:8080/api/v1/user/signup",
+              "http://localhost:8080/api/user/signup",
               null,
               {
                 params: {

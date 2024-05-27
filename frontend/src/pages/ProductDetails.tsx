@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import CommonSection from "../components/CommonSection/CommonSection";
 import Title from "../components/Title/Title";
@@ -8,28 +8,22 @@ import { Furniture } from "./Shop";
 
 const ProductDetails: React.FC = () => {
   const [tab, setTab] = useState("desc");
-  const [gosterilecekYorumSayisi, setGosterilecekYorumSayisi] = useState(5);
-  const yorumlariGoster = () => {
-    setGosterilecekYorumSayisi((prevSayi) => prevSayi + 5);
+  const [displayedCommentNumber, setDisplayedCommentNumber] = useState(5);
+  const showMoreComments = () => {
+    setDisplayedCommentNumber((count) => count + 5);
   };
-  const { product } = useLoaderData() as { product: Furniture };
+  const { product, comments } = useLoaderData() as {
+    product: Furniture;
+    comments: Comment[];
+  };
 
   const loremText =
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit Quo nam ipsum corporis vero fugit veritatis odit obcaecati omnis, velit temporibus, aliquam molestias doloremque! Hicplaceat voluptas enim laboriosam dolore ipsum?Lorem ipsumdolor sit amet consectetur, adipisicing elit. Numquam, ullamdicta asperiores voluptate nostrum architecto laboriosamqui, quisquam soluta doloribus quod illo quos repellatfugiat. Ratione dignissimos quasi perferendis quaerat.";
-  interface Yorum {
+  interface Comment {
     id: number;
-    kullaniciAdi: string;
-    metin: string;
+    user: { username: string };
+    content: string;
   }
-  const ornekYorumlar: Yorum[] = [
-    { id: 1, kullaniciAdi: "kullanici1", metin: "Harika bir ürün!" },
-    { id: 2, kullaniciAdi: "kullanici2", metin: "Kargo çok hızlı geldi." },
-    { id: 3, kullaniciAdi: "kullanici3", metin: "Ürün beklediğim gibi çıktı." },
-    { id: 4, kullaniciAdi: "kullanici1", metin: "Harika bir ürün!" },
-    { id: 5, kullaniciAdi: "kullanici2", metin: "Kargo çok hızlı geldi." },
-    { id: 6, kullaniciAdi: "kullanici3", metin: "Ürün beklediğim gibi çıktı." },
-    // Daha fazla yorum...
-  ];
 
   return (
     <Title title={`${product?.name}`}>
@@ -137,17 +131,19 @@ const ProductDetails: React.FC = () => {
                 <div className="tab-content review">
                   <h6 className="titleforreview">Leave Your Experience</h6>
 
-                  <textarea
-                    className="comment-area"
-                    name=""
-                    id=""
-                    placeholder="Leave a comment...."
-                  ></textarea>
-                  <button className="btn-submit">Submit</button>
+                  <Form method="post">
+                    <input type="hidden" name="_action" value="comment" />
+                    <textarea
+                      className="comment-area"
+                      name="content"
+                      placeholder="Leave a comment...."
+                    ></textarea>
+                    <button className="btn-submit">Submit</button>
+                  </Form>
                   <h6 className="titleforreview">Reviews</h6>
-                  {ornekYorumlar
-                    .slice(0, gosterilecekYorumSayisi)
-                    .map((yorum, index) => (
+                  {comments
+                    .slice(0, displayedCommentNumber)
+                    .map((comment, index) => (
                       <div key={index}>
                         <img
                           width="32"
@@ -156,13 +152,13 @@ const ProductDetails: React.FC = () => {
                           alt="user"
                         />
                         <div className="rvw-txt">
-                          <h6>{yorum.kullaniciAdi}</h6>
-                          <p>{yorum.metin}</p>
+                          <h6>{comment.user.username}</h6>
+                          <p>{comment.content}</p>
                         </div>
                       </div>
                     ))}
-                  {gosterilecekYorumSayisi < ornekYorumlar.length && (
-                    <button className="btn-more" onClick={yorumlariGoster}>
+                  {displayedCommentNumber < comments.length && (
+                    <button className="btn-more" onClick={showMoreComments}>
                       Daha Fazla Göster
                     </button>
                   )}
