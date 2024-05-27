@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../styles/login.css";
-import { Container, Col, Form, FormGroup } from "reactstrap";
+import { Container, Col, FormGroup } from "reactstrap";
 import coverImage from "../assets/_023d4d8a-cd7e-4c0f-bf4c-2c319ffac4e4.jpg";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 const Login: React.FC = () => {
   const [action, setAction] = useState("");
   const registerLink = () => {
@@ -29,12 +29,23 @@ const Login: React.FC = () => {
                 <div className="login-form-inside">
                   <h3>Login</h3>
                   <p>Welcome back! Please enter your details</p>
-                  <Form>
+                  <Form method="post">
+                    <input type="hidden" name="_action" value="login" />
                     <FormGroup>
-                      <input type="email" placeholder="email" required />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="email"
+                        required
+                      />
                     </FormGroup>
                     <FormGroup>
-                      <input type="password" placeholder="password" required />
+                      <input
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                        required
+                      />
                     </FormGroup>
 
                     <button className="shop-btn">Login</button>
@@ -58,15 +69,31 @@ const Login: React.FC = () => {
               <div className="login-form-inside">
                 <h3>Signup</h3>
                 <p>Welcome! Please enter your details</p>
-                <Form>
+                <Form method="post">
+                  <input type="hidden" name="_action" value="signup" />
                   <FormGroup>
-                    <input type="text" placeholder="name" required />
+                    <input
+                      type="text"
+                      name="username"
+                      placeholder="name"
+                      required
+                    />
                   </FormGroup>
                   <FormGroup>
-                    <input type="email" placeholder="email" required />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      required
+                    />
                   </FormGroup>
                   <FormGroup>
-                    <input type="password" placeholder="password" required />
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="password"
+                      required
+                    />
                   </FormGroup>
 
                   <button className="shop-btn">Signup</button>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "../styles/home.css";
-import { Link } from "react-router-dom";
-import Title from "../components/Title/Title";
-import { Container, Row, Col } from "reactstrap";
+import React from "react";
+import { Link, useLoaderData } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
 import Banner from "../assets/slider.png";
 import Advantages from "../components/Advantages/Advantages";
+import Title from "../components/Title/Title";
+import "../styles/home.css";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -33,17 +33,7 @@ const responsive = {
   },
 };
 const Home: React.FC = () => {
-  const [editorsPickProducts, setEditorsPickProducts] = useState<Furniture[]>(
-    []
-  );
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch("http://localhost:8080/api/editors-pick");
-      const data = await res.json();
-      setEditorsPickProducts(data);
-    }
-    getData();
-  }, []);
+  const { products } = useLoaderData() as { products: Furniture[] };
   return (
     <Title title={"Home"}>
       <section className="banner-section">
@@ -76,7 +66,7 @@ const Home: React.FC = () => {
       <div className="carousel">
         <h1>Editor's Pick</h1>
         <Carousel responsive={responsive}>
-          {editorsPickProducts.map((product) => {
+          {products.map((product) => {
             return (
               <ProductCard
                 imageId={product.imageId}

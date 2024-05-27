@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             <div className="navigate">
               <ul className="menu">
                 <li className="nav-item">
-                  <NavLink to="home">Home</NavLink>
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink to="shop">Shop</NavLink>
