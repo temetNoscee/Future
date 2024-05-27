@@ -61,7 +61,7 @@ export const routes = createBrowserRouter([
           const _action = form.get("_action") as "comment" | "ask";
           const id = params.id;
           invariant(id, "id is required");
-          if (_action) {
+          if (_action === "comment") {
             const content = form.get("content") as string;
             await api.post("/comment", null, {
               params: {
