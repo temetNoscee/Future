@@ -22,6 +22,21 @@ const Questions: React.FC = () => {
   const { questions } = useLoaderData() as { questions: Question[] };
   const pendingQuestions = questions.filter((question) => !question.response);
 
+  if (pendingQuestions.length === 0) {
+    return (
+      <section>
+        <Container>
+          <Row>
+            <Col lg="8">
+              <h4>Pending Questions</h4>
+              <p>No pending questions</p>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     <section>
       <Container>
