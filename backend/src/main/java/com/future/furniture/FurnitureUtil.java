@@ -25,6 +25,8 @@ public class FurnitureUtil {
             furniture.setCategory(category);
             furniture.setImageId(imageId);
             furniture.setEditorsPick(false);
+            String lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit Quo nam ipsum corporis vero fugit veritatis odit obcaecati omnis, velit temporibus, aliquam molestias doloremque! Hicplaceat voluptas enim laboriosam dolore ipsum?Lorem ipsumdolor sit amet consectetur, adipisicing elit. Numquam, ullamdicta asperiores voluptate nostrum architecto laboriosamqui, quisquam soluta doloribus quod illo quos repellatfugiat. Ratione dignissimos quasi perferendis quaerat.";
+            furniture.setDescription(lorem);
             furniture.setStock(random.nextInt(100) + 1);
             furnitures.add(furniture);
         }

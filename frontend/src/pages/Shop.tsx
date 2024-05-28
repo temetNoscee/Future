@@ -21,6 +21,7 @@ export interface Furniture {
   price: string;
   category: string;
   imageId: string;
+  description: string;
 }
 
 type Paged<T> = {

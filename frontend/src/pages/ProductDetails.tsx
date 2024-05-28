@@ -105,7 +105,7 @@ const ProductDetails: React.FC = () => {
                   <p>(4.5 ratings)</p>
                 </div>
                 <span className="price">${product?.price}</span>
-                <p className="product-desc">{loremText}</p>
+                <p className="product-desc">{product.description}</p>
 
                 <button className="shop-btn">Add to Cart</button>
               </div>
@@ -141,7 +141,7 @@ const ProductDetails: React.FC = () => {
 
               {tab == "desc" ? (
                 <div className="tab-content description">
-                  <p>{loremText}</p>
+                  <p>{product.description}</p>
                 </div>
               ) : tab == "rew" ? (
                 <div className="tab-content review">

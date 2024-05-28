@@ -24,6 +24,8 @@ public class Furniture {
     private String imageId;
     private Boolean isEditorsPick;
     private Integer stock;
+    @Column(length = 1000)
+    private String description;
 
     public Integer getStock() {
         return stock;
@@ -33,13 +35,21 @@ public class Furniture {
         this.stock = stock;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public enum FurnitureCategory {
         CHAIR,
         FLOOR_LAMP,
         SOFA,
     }
 
-    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick, Integer stock) {
+    public Furniture(Long id, String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick, Integer stock, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -47,18 +57,20 @@ public class Furniture {
         this.imageId = imageId;
         this.isEditorsPick = isEditorsPick;
         this.stock = stock;
+        this.description = description;
     }
 
     public Furniture() {
     }
 
-    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick, Integer stock) {
+    public Furniture(String name, BigDecimal price, FurnitureCategory category, String imageId, Boolean isEditorsPick, Integer stock, String description) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.imageId = imageId;
         this.isEditorsPick = isEditorsPick;
         this.stock = stock;
+        this.description = description;
     }
 
     public Boolean getEditorsPick() {

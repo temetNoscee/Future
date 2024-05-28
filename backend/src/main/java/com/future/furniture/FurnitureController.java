@@ -58,7 +58,8 @@ public class FurnitureController {
             @RequestParam String name,
             @RequestParam BigDecimal price,
             @RequestParam FurnitureCategory category,
-            @RequestParam Integer stock
+            @RequestParam Integer stock,
+            @RequestParam String description
     ) {
         //TODO: This should require admin privileges.
         Furniture furniture = new Furniture();
@@ -67,6 +68,7 @@ public class FurnitureController {
         furniture.setCategory(category);
         furniture.setStock(stock);
         furniture.setEditorsPick(false);
+        furniture.setDescription(description);
 
         UUID imageId = UUID.randomUUID();
         String imageName = imageId + ".jpg";
