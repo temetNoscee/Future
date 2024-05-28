@@ -1,8 +1,11 @@
 package com.future.furniture;
 
+import com.future.comment.Comment;
+import com.future.question.Question;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table
@@ -27,6 +30,12 @@ public class Furniture {
     @Column(length = 1000)
     private String description;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Question> questions;
+
     public Integer getStock() {
         return stock;
     }
@@ -41,6 +50,22 @@ public class Furniture {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public enum FurnitureCategory {

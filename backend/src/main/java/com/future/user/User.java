@@ -1,6 +1,10 @@
 package com.future.user;
 
+import com.future.comment.Comment;
+import com.future.question.Question;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table
@@ -21,6 +25,12 @@ public class User {
     private String password;
     private String email;
     private Boolean isAdmin = false;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Question> questions;
 
     public User() {
     }
@@ -77,5 +87,21 @@ public class User {
 
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }
