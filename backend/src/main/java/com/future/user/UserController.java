@@ -54,11 +54,16 @@ public class UserController {
     public Profile getProfile(@RequestParam String token) {
         Optional<Token> userToken = tokenRepository.findByToken(token);
         if (userToken.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Token not found");
         }
-        return new Profile(userToken.get().getUser().getUsername(), userToken.get().getUser().getEmail());
+        User user = userToken.get().getUser();
+        return new Profile(
+                user.getUsername(),
+                user.getEmail(),
+                user.getAdmin()
+        );
     }
 
-    public record Profile(String username, String email) {
+    public record Profile(String username, String email, Boolean isAdmin) {
     }
 }

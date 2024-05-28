@@ -22,8 +22,8 @@ public class QuestionController {
     private FurnitureRepository furnitureRepository;
 
     @GetMapping
-    public List<Question> getQuestions() {
-        //TODO: This should require admin privileges.
+    public List<Question> getQuestions(@RequestParam String token) {
+        authorizationFilter.requiresAdmin(token);
         return questionRepository.findAll();
     }
 
@@ -37,8 +37,8 @@ public class QuestionController {
     }
 
     @PostMapping("/{id}/answer")
-    public void answerQuestion(@PathVariable Long id, @RequestParam String response) {
-        //TODO: This should require admin privileges.
+    public void answerQuestion(@PathVariable Long id, @RequestParam String response, @RequestParam String token) {
+        authorizationFilter.requiresAdmin(token);
         Question question = questionRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found"));
         question.setResponse(response);

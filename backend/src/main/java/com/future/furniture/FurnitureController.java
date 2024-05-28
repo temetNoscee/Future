@@ -1,6 +1,7 @@
 package com.future.furniture;
 
 import com.future.furniture.Furniture.FurnitureCategory;
+import com.future.user.AuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -28,11 +29,13 @@ import java.util.UUID;
 public class FurnitureController {
     private final FurnitureService furnitureService;
     private final FurnitureRepository furnitureRepository;
+    private final AuthorizationFilter authorizationFilter;
 
     @Autowired
-    public FurnitureController(FurnitureService furnitureService, FurnitureRepository furnitureRepository) {
+    public FurnitureController(FurnitureService furnitureService, FurnitureRepository furnitureRepository, AuthorizationFilter authorizationFilter) {
         this.furnitureService = furnitureService;
         this.furnitureRepository = furnitureRepository;
+        this.authorizationFilter = authorizationFilter;
     }
 
     @GetMapping("/{id}/thumbnail")
@@ -59,9 +62,10 @@ public class FurnitureController {
             @RequestParam BigDecimal price,
             @RequestParam FurnitureCategory category,
             @RequestParam Integer stock,
-            @RequestParam String description
+            @RequestParam String description,
+            @RequestParam String token
     ) {
-        //TODO: This should require admin privileges.
+        authorizationFilter.requiresAdmin(token);
         Furniture furniture = new Furniture();
         furniture.setName(name);
         furniture.setPrice(price);
@@ -135,8 +139,8 @@ public class FurnitureController {
     }
 
     @PostMapping("/{id}/change-stock")
-    public void changeStock(@PathVariable Long id, @RequestParam Integer stock) {
-        //TODO: This should require admin privileges.
+    public void changeStock(@PathVariable Long id, @RequestParam Integer stock, @RequestParam String token) {
+        authorizationFilter.requiresAdmin(token);
         Furniture furniture = furnitureRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Furniture not found"));
         furniture.setStock(stock);

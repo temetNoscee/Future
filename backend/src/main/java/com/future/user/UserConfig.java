@@ -13,6 +13,7 @@ public class UserConfig {
             user.setUsername("admin");
             user.setPassword("123");
             user.setEmail("admin@email.com");
+            user.setAdmin(true);
             userRepository.save(user);
             Token token = new Token();
             token.setUser(user);

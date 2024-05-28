@@ -18,11 +18,20 @@ import ProductDetails from "../pages/ProductDetails";
 import Shop from "../pages/Shop";
 import { api } from "../api";
 import invariant from "tiny-invariant";
+import { requiresAdmin } from "./utils";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layouts />,
+    loader: async () => {
+      const { data: profile } = await api().get("/user/profile", {
+        validateStatus(status) {
+          return status === 200 || status === 404;
+        },
+      });
+      return { profile };
+    },
     children: [
       {
         path: "/",
@@ -138,11 +147,19 @@ export const routes = createBrowserRouter([
       },
     ],
   },
-  { path: "dashboard", element: <AdminNav /> },
+  {
+    path: "dashboard",
+    element: <AdminNav />,
+    loader: async () => {
+      await requiresAdmin();
+      return null;
+    },
+  },
   {
     path: "dashboard/add-product",
     element: <AddProduct />,
     loader: async () => {
+      await requiresAdmin();
       const { data: categories } = await api().get("/furniture/categories");
       return { categories };
     },
@@ -167,6 +184,7 @@ export const routes = createBrowserRouter([
       return null;
     },
     loader: async () => {
+      await requiresAdmin();
       const { data: questions } = await api().get("/question");
       return { questions };
     },
@@ -175,6 +193,7 @@ export const routes = createBrowserRouter([
     path: "dashboard/quantity",
     element: <Quantity />,
     loader: async () => {
+      await requiresAdmin();
       const { data: furnitures } = await api().get("/furniture/all");
       return { furnitures };
     },

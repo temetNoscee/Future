@@ -21,4 +21,11 @@ public class AuthorizationFilter {
         }
         return userToken.get().getUser();
     }
+
+    public void requiresAdmin(String token) {
+        User user = requiresLogin(token);
+        if (!user.getAdmin()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is not an admin");
+        }
+    }
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import "../Header/header.css";
 import "../../App.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
 import logo from "../../assets/logo-modified.png";
 import { Container, Row } from "reactstrap";
 
 const Header: React.FC = () => {
+  const { profile } = useLoaderData() as { profile: { isAdmin: boolean } };
+  const isAdmin = profile?.isAdmin ?? false;
+
   return (
     <header className="header">
       <Container>
@@ -26,6 +29,11 @@ const Header: React.FC = () => {
                 <li className="nav-item">
                   <NavLink to="shop">Shop</NavLink>
                 </li>
+                {isAdmin && (
+                  <li className="nav-item">
+                    <NavLink to="dashboard">Dashboard</NavLink>
+                  </li>
+                )}
               </ul>
             </div>
 
