@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row } from "reactstrap";
 import logo from "../assets/logo-modified.png";
 import "../styles/adminNav.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 const admin_nav = [
   {
     display: "Change quantity",
@@ -55,6 +55,9 @@ const AdminNav: React.FC = () => {
             </div>
           </Row>
         </Container>
+      </section>
+      <section>
+        <Outlet />
       </section>
     </>
   );

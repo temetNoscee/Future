@@ -154,59 +154,58 @@ export const routes = createBrowserRouter([
       await requiresAdmin();
       return null;
     },
-  },
-  {
-    path: "dashboard/add-product",
-    element: <AddProduct />,
-    loader: async () => {
-      await requiresAdmin();
-      const { data: categories } = await api().get("/furniture/categories");
-      return { categories };
-    },
-    action: async ({ request }: ActionFunctionArgs) => {
-      const form = await request.formData();
-      const { data: id } = await api().post("/furniture", form);
-      return redirect(`/shop/${id}`);
-    },
-  },
-  {
-    path: "dashboard/answer",
-    element: <Questions />,
-    action: async ({ request }: ActionFunctionArgs) => {
-      const form = await request.formData();
-      const questionId = form.get("question-id") as string;
-      const response = form.get("response") as string;
-      await api().post(`/question/${questionId}/answer`, null, {
-        params: {
-          response,
+    children: [
+      {
+        path: "add-product",
+        element: <AddProduct />,
+        loader: async () => {
+          const { data: categories } = await api().get("/furniture/categories");
+          return { categories };
         },
-      });
-      return null;
-    },
-    loader: async () => {
-      await requiresAdmin();
-      const { data: questions } = await api().get("/question");
-      return { questions };
-    },
-  },
-  {
-    path: "dashboard/quantity",
-    element: <Quantity />,
-    loader: async () => {
-      await requiresAdmin();
-      const { data: furnitures } = await api().get("/furniture/all");
-      return { furnitures };
-    },
-    action: async ({ request }: ActionFunctionArgs) => {
-      const form = await request.formData();
-      const stock = form.get("stock") as string;
-      const furnitureId = form.get("furniture-id") as string;
-      await api().post(`/furniture/${furnitureId}/change-stock`, null, {
-        params: {
-          stock,
+        action: async ({ request }: ActionFunctionArgs) => {
+          const form = await request.formData();
+          const { data: id } = await api().post("/furniture", form);
+          return redirect(`/shop/${id}`);
         },
-      });
-      return null;
-    },
+      },
+      {
+        path: "answer",
+        element: <Questions />,
+        action: async ({ request }: ActionFunctionArgs) => {
+          const form = await request.formData();
+          const questionId = form.get("question-id") as string;
+          const response = form.get("response") as string;
+          await api().post(`/question/${questionId}/answer`, null, {
+            params: {
+              response,
+            },
+          });
+          return null;
+        },
+        loader: async () => {
+          const { data: questions } = await api().get("/question");
+          return { questions };
+        },
+      },
+      {
+        path: "quantity",
+        element: <Quantity />,
+        loader: async () => {
+          const { data: furnitures } = await api().get("/furniture/all");
+          return { furnitures };
+        },
+        action: async ({ request }: ActionFunctionArgs) => {
+          const form = await request.formData();
+          const stock = form.get("stock") as string;
+          const furnitureId = form.get("furniture-id") as string;
+          await api().post(`/furniture/${furnitureId}/change-stock`, null, {
+            params: {
+              stock,
+            },
+          });
+          return null;
+        },
+      },
+    ],
   },
 ]);
