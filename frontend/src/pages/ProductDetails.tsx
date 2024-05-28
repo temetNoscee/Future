@@ -50,7 +50,7 @@ const ProductDetails: React.FC = () => {
           <Row>
             <Col lg="5">
               <img
-                src={`http://localhost:8080/images/${product?.imageId}.jpg`}
+                src={`/api/furniture/${product?.id}/thumbnail`}
                 alt=".product-detail"
               />
             </Col>

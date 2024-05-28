@@ -20,10 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className="item">
       <div className="product-img">
-        <img
-          src={`http://localhost:8080/images/${imageId}.jpg`}
-          alt="product"
-        />
+        <img src={`/api/furniture/${productId}/thumbnail`} alt="product" />
       </div>
 
       <div className="product-info">

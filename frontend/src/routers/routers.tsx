@@ -139,7 +139,19 @@ export const routes = createBrowserRouter([
     ],
   },
   { path: "dashboard", element: <AdminNav /> },
-  { path: "dashboard/add-product", element: <AddProduct /> },
+  {
+    path: "dashboard/add-product",
+    element: <AddProduct />,
+    loader: async () => {
+      const { data: categories } = await api().get("/furniture/categories");
+      return { categories };
+    },
+    action: async ({ request }: ActionFunctionArgs) => {
+      const form = await request.formData();
+      const { data: id } = await api().post("/furniture", form);
+      return redirect(`/shop/${id}`);
+    },
+  },
   {
     path: "dashboard/answer",
     element: <Questions />,

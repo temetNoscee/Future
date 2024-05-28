@@ -1,27 +1,35 @@
 import React from "react";
-import { Form, FormGroup, Container, Row, Col } from "reactstrap";
+import { FormGroup, Container, Row, Col } from "reactstrap";
 import "../styles/addProduct.css";
+import { Form, useLoaderData } from "react-router-dom";
+
 const AddProduct: React.FC = () => {
+  const { categories } = useLoaderData() as { categories: string[] };
   return (
     <section>
       <Container>
         <Row>
           <Col lg="8">
             <h4>Add Product</h4>
-            <Form name="add-product-form">
+            <Form
+              name="add-product-form"
+              method="post"
+              encType="multipart/form-data"
+            >
               <FormGroup className="form-group">
                 <span>Product title</span>
                 <input
-                  name="title"
+                  name="name"
                   type="text"
                   placeholder="Insert product name.."
+                  required
                 />
               </FormGroup>
 
               <FormGroup className="form-group">
                 <span>Description</span>
                 <input
-                  name="desc"
+                  name="description"
                   type="text"
                   placeholder="Short explation of the product..."
                 />
@@ -29,18 +37,20 @@ const AddProduct: React.FC = () => {
               <div className="info">
                 <FormGroup className="form-group">
                   <span>Price</span>
-                  <input name="price" type="number" />
+                  <input name="price" type="number" required />
                 </FormGroup>
                 <FormGroup className="form-group">
                   <span>Stock Information</span>
-                  <input name="stock" type="number" />
+                  <input name="stock" type="number" required />
                 </FormGroup>
                 <FormGroup className="form-group">
                   <span>Category</span>
-                  <select name="category">
-                    <option value="chair">Chair</option>
-                    <option value="sofa">Sofa</option>
-                    <option value="floor-lamp">Floor Lamp</option>
+                  <select name="category" required defaultValue={categories[0]}>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
                   </select>
                 </FormGroup>
               </div>
