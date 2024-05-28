@@ -29,7 +29,7 @@ export const routes = createBrowserRouter([
         element: <Home />,
         index: true,
         loader: async () => {
-          const { data: products } = await api().get("/editors-pick");
+          const { data: products } = await api().get("/furniture/editors-pick");
           return { products };
         },
       },
@@ -37,7 +37,7 @@ export const routes = createBrowserRouter([
         path: "shop",
         element: <Shop />,
         loader: async () => {
-          const { data: categories } = await api().get("/categories");
+          const { data: categories } = await api().get("/furniture/categories");
           return { categories };
         },
       },
@@ -48,7 +48,7 @@ export const routes = createBrowserRouter([
         loader: async ({ params }: LoaderFunctionArgs) => {
           const id = params.id;
           invariant(id, "id is required");
-          const { data: product } = await api().get(`/shop/${id}`);
+          const { data: product } = await api().get(`/furniture/${id}`);
           const { data: comments } = await api().get("/comment", {
             params: {
               furnitureId: id,

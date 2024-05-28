@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api/furniture")
 
 public class FurnitureController {
     private final FurnitureService furnitureService;
@@ -25,7 +25,7 @@ public class FurnitureController {
         this.furnitureRepository = furnitureRepository;
     }
 
-    @GetMapping("/furniture/all")
+    @GetMapping("/all")
     public List<Furniture> getAllFurnitures() {
         return furnitureRepository.findAll();
     }
@@ -73,12 +73,12 @@ public class FurnitureController {
 
     /*DENEMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
     @GetMapping
-    @RequestMapping(path = "/shop/{id}")
+    @RequestMapping(path = "/{id}")
     public Furniture getSelectedProduct(@PathVariable Long id) {
         return furnitureService.getSelectedProduct(id);
     }
 
-    @PostMapping("/furniture/{id}/change-stock")
+    @PostMapping("/{id}/change-stock")
     public void changeStock(@PathVariable Long id, @RequestParam Integer stock) {
         //TODO: This should require admin privileges.
         Furniture furniture = furnitureRepository.findById(id)

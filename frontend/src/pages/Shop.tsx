@@ -45,7 +45,7 @@ const Shop: React.FC = () => {
   const page = params.get("page") ?? 0;
   useEffect(() => {
     const getDatas = async () => {
-      const url = `http://localhost:8080/api?name=${searchQuery}&category=${selectedCategory}&page=${page}`;
+      const url = `http://localhost:8080/api/furniture?name=${searchQuery}&category=${selectedCategory}&page=${page}`;
       console.log(url);
       const response = await fetch(url);
       const body = await response.json();
